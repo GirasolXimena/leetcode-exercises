@@ -71,7 +71,7 @@ const reflectHorizontal = mapMatrix(({ matrix, i, j }) => {
  Do not return anything, modify matrix in-place instead.
  */
 
-function rotate(matrix: number[][]): void {
+export function rotate(matrix: number[][]): void {
   reflectDiagonal(matrix);
   reflectHorizontal(matrix);
 };
