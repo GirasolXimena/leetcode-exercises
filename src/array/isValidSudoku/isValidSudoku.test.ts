@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { isValidSudoku } from './isValidSudoku'
+import { isValidSudoku, isValidSudokuSet } from './isValidSudoku'
 
 
 describe('isValidSudoku', () => {
@@ -17,6 +17,7 @@ describe('isValidSudoku', () => {
     ]
   
     expect(isValidSudoku(board)).toEqual(true)
+    expect(isValidSudokuSet(board)).toEqual(true)
   })
   
   test('invalid sudoku box', () => {
@@ -35,6 +36,7 @@ describe('isValidSudoku', () => {
     // except with the 5 in the top left corner being modified to 8.
     // Since there are two 8's in the top left 3x3 sub-box, it is invalid.
     expect(isValidSudoku(board)).toEqual(false)
+    expect(isValidSudokuSet(board)).toEqual(false)
   })
 
   test('invalid sudoku row', () => {
@@ -69,6 +71,7 @@ describe('isValidSudoku', () => {
     // Explanation: Same as Example 1,
     // except there are two 8's in the 3rd column
     expect(isValidSudoku(board)).toEqual(false)
+    expect(isValidSudokuSet(board)).toEqual(false)
   })
 
 })
