@@ -7,7 +7,8 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"sleistner.vscode-fileutils"
+				"sleistner.vscode-fileutils",
+				"vitest.explorer"
 			]
 		}
 	}

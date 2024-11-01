@@ -8,9 +8,8 @@ export function isValidSudoku(board: string[][]): boolean {
     const sudokuMap = new Map()
     for (let i = 0; i < board.length; i++) {
         const row = board[i];
-        // if(!row || !row.length) return false;
         const rowStr = `row-${i}`
-        // let 
+
         sudokuMap.set(rowStr, new Map())
         const rowMap = sudokuMap.get(rowStr)
 
@@ -32,7 +31,6 @@ export function isValidSudoku(board: string[][]): boolean {
                 continue
             }
 
-            // if (rowMap.has(cell)) {
             if (rowMap.has(cell)) {
                 return false
             } else {
