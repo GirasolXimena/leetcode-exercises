@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { singleNumber } from "./singleNumber";
+import { singleNumber, singleNumberHashTable, singleNumberSet, singleNumberSetBitwise } from "./singleNumber";
 
 describe('single number', () => {
   test('example 1', () => {
@@ -7,6 +7,9 @@ describe('single number', () => {
     const result = 1
 
     expect(singleNumber(input)).toEqual(result)
+    expect(singleNumberHashTable(input)).toEqual(result)
+    expect(singleNumberSet(input)).toEqual(result)
+    expect(singleNumberSetBitwise(input)).toEqual(result)
   })
 
   test('example 2', () => {
@@ -14,6 +17,9 @@ describe('single number', () => {
     const result = 4
 
     expect(singleNumber(input)).toEqual(result)
+    expect(singleNumberHashTable(input)).toEqual(result)
+    expect(singleNumberSet(input)).toEqual(result)
+    expect(singleNumberSetBitwise(input)).toEqual(result)
   })
 
   test('example 3', () => {
@@ -21,5 +27,8 @@ describe('single number', () => {
     const result = 1
 
     expect(singleNumber(input)).toEqual(result)
+    expect(singleNumberHashTable(input)).toEqual(result)
+    expect(singleNumberSet(input)).toEqual(result)
+    expect(singleNumberSetBitwise(input)).toEqual(result)
   })
 })
