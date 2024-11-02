@@ -1,6 +1,12 @@
 // https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/769/
 
 type SudokuBoard = Array<string[]>
+type HashType = "row" | "column" | "grid"
+type HashGetterFnProps = {
+    row: number,
+    column: number,
+}
+type HashGetterFn = ({ row, column }: HashGetterFnProps) => number
 
 /**
  * first intuition is to make a hash map
@@ -19,69 +25,10 @@ type SudokuBoard = Array<string[]>
 // this will hold the data structure for the sudoku so we don't have to traverse every row, column, and grid
 // n amount of times
 
-const hashTypes = ['row', 'column', 'grid']
 
-function createSudokuMap() {
-    const sudokuMap = new Map<string, Array<number>>()
-    // create a hash for each row, column, and grid
-    hashTypes.forEach((hash) =>
-        new Array(9).fill(0).forEach((val, i) =>
-            sudokuMap.set(`${hash}-${i}`, new Array(9).fill(val))
-        ))
 
-    return sudokuMap
-}
+const hashTypes: Array<HashType> = ['row', 'column', 'grid']
 
-export function isValidSudokuSet(board: SudokuBoard): boolean {
-    let isValid = true;
-    let checkCounter = 0
-    const sudokuMap = createSudokuMap()
-
-    for (let row = 0; row < board.length; row++) {
-        if(!isValid) break;
-        for (let col = 0; col < board.length; col++) {
-            if(!isValid) break;
-            const cell = board[row][col]
-            const rowHash = `row-${row}`
-            const colHash = `column-${col}`
-            const gridHash = `grid-${Math.floor(row / 3) * 3 + Math.floor(col / 3)}`
-            const setHashes = [rowHash, colHash, gridHash]
-            
-            for (let hash of setHashes) {
-                checkCounter ++
-                if(cell === '.') continue
-
-                
-                const set = sudokuMap.get(hash)
-                if (!set) throw new Error(`Set  at :${hash} was not found`)
-                const num = Number(cell)
-
-                if (isNaN(num)) throw new Error(`problem turning cell ${cell} into number ${num}`)
-
-                // check if we've seen any ones at index 0
-                // any twos at index 1
-                // any threes at index 2
-                // etc
-                const i = num - 1
-
-                // 
-                if (set[i] === 0) {
-                    // we have not seeen this number,
-                    // increment counter
-                    set[i] = 1
-                } else {
-                    // if we have seen it then
-                    // sudoku is invalid we can stop looking
-                    isValid = false
-                    break;
-                }
-            }
-        }
-
-    }
-
-    return isValid
-}
 export function isValidSudoku(board: SudokuBoard): boolean {
     // 9 rows
     // 9 columns
@@ -142,3 +89,104 @@ export function isValidSudoku(board: SudokuBoard): boolean {
 
     return true
 };
+
+function createSudokuMap() {
+    const sudokuMap = new Map<string, Array<number>>()
+    // create a hash for each row, column, and grid
+    hashTypes.forEach((hash) =>
+        new Array(9).fill(0).forEach((val, i) =>
+            sudokuMap.set(`${hash}-${i}`, new Array(9).fill(val))
+        ))
+
+    return sudokuMap
+}
+
+const n = 9
+
+export function isValidSudokuSet(board: SudokuBoard): boolean {
+    let isValid = true;
+    let checkCounter = 0
+    const sudokuMap = createSudokuMap()
+    const rows = new Array(9).fill(new Array(9).fill(0))
+
+    for (let row = 0; row < board.length; row++) {
+        if (!isValid) break;
+        for (let col = 0; col < board.length; col++) {
+            if (!isValid) break;
+            const cell = board[row][col]
+            const hashStrings = {
+                row: row,
+                column: col,
+                grid: Math.floor(row / 3) * 3 + Math.floor(col / 3)
+            }
+
+            for (let [hash, hashNum] of Object.entries(hashStrings)) {
+                const key = `${hash}-${hashNum}`
+                checkCounter++
+
+                if (cell === '.') continue
+
+
+                const set = sudokuMap.get(key)
+                if (!set) throw new Error(`Set  at :${key} was not found`)
+                const num = Number(cell)
+
+                if (isNaN(num)) throw new Error(`problem turning cell ${cell} into number ${num}`)
+
+                // check if we've seen any ones at index 0
+                // any twos at index 1
+                // any threes at index 2
+                // etc
+                const i = num - 1
+
+                // 
+                if (set[i] === 0) {
+                    // we have not seeen this number,
+                    // increment counter
+                    set[i] = 1
+                } else {
+                    // if we have seen it then
+                    // sudoku is invalid we can stop looking
+                    isValid = false
+                    break;
+                }
+            }
+        }
+
+    }
+
+    return isValid
+}
+
+export function isValidSudokuFixedArray(board: SudokuBoard): boolean {
+    let isValid = true
+    const rows: number[][] = new Array(9).fill(undefined).map(() => new Array(9).fill(0))
+    const columns: number[][] = new Array(9).fill(undefined).map(() => new Array(9).fill(0))
+    const grids: number[][] = new Array(9).fill(undefined).map(() => new Array(9).fill(0))
+
+    for (let y = 0; isValid && y < board.length; y++) {
+        for (let x = 0; isValid && x < board.length; x++) {
+            const cell = board[y][x]
+            if (cell === ".") continue
+            const gridNum = Math.floor(y / 3) * 3 + Math.floor(x / 3)
+
+            const column = columns[x]
+            const row = rows[y]
+            const grid = grids[gridNum]
+            const num = Number(cell) - 1
+
+            for (let array of [row, column, grid]) {
+                if (array[num] === 0) {
+                    array[num] = 1
+                } else {
+                    isValid = false
+                    break
+                }
+            }
+        }
+    }
+
+    return isValid
+}
+
+
