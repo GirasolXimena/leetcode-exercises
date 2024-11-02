@@ -158,11 +158,41 @@ export function isValidSudokuSet(board: SudokuBoard): boolean {
     return isValid
 }
 
+// create an array of 9 zeroes [0,0,0,0,0,0,0,0,0] `nums` to represent the numbers 1 - 9
+// create 9 such arrays to represent one from each column, row, or grid
+// when we see the a number, ie. `x` we will go to nums[x - 1] and increment it by 1
+// since we know exactly where to look each time this is a constant time operation
+const createLookupArray = (): number[][] => new Array(n).fill(0).map(() => new Array(n).fill(0)) 
+
+
+/**
+ * Time complexity: O(n^2)
+ * 
+ * Given a board with length n
+ * We will have to traverse n arrays n times
+ * creating new arrays for the lookup tables are linear time
+ * each lookup table operation also will be linear time
+ * since we know ahead of time where to look
+ * 
+ * Space complexity O(n)
+ * 
+ * we have to create an array of N to hold one for each
+ * row, column, and grid
+ * O(n)
+ * We create 3 arrays of fixed length of 10
+ * linear time O(1)
+ * O(n) * O(1 * 3) = O(n)
+ * 
+ * 
+ * do not need to store any more data
+ * const declarations are only for ease of reading
+ */
 export function isValidSudokuFixedArray(board: SudokuBoard): boolean {
     let isValid = true
-    const rows: number[][] = new Array(9).fill(undefined).map(() => new Array(9).fill(0))
-    const columns: number[][] = new Array(9).fill(undefined).map(() => new Array(9).fill(0))
-    const grids: number[][] = new Array(9).fill(undefined).map(() => new Array(9).fill(0))
+
+    const rows = createLookupArray()
+    const columns = createLookupArray()
+    const grids = createLookupArray()
 
     for (let y = 0; isValid && y < board.length; y++) {
         for (let x = 0; isValid && x < board.length; x++) {
@@ -177,9 +207,17 @@ export function isValidSudokuFixedArray(board: SudokuBoard): boolean {
 
             for (let array of [row, column, grid]) {
                 if (array[num] === 0) {
+                    // if we haven't seen this num before
+                    // set the array[num] to 1
                     array[num] = 1
                 } else {
+                    // if array[num] was 1 already
+                    //  it means sudoku is invalid
+                    // no doubles!
                     isValid = false
+                    // exit loop
+                    // once a sudoku is invalid there is
+                    // no way to recover
                     break
                 }
             }
