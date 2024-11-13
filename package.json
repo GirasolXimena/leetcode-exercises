@@ -4,6 +4,7 @@
     "test": "vitest"
   },
   "devDependencies": {
+    "@faker-js/faker": "^9.2.0",
     "@vitest/coverage-v8": "^2.1.4",
     "vitest": "^2.1.4"
   }
