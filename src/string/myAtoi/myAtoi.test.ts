@@ -49,6 +49,11 @@ describe('myAtoi', () => {
             let result = myAtoi(s)
             expect(result).toBe(0)
         })
+        test('no integers', () => {
+            let s ='abcdefghijkl';
+            let result = myAtoi(s)
+            expect(result).toBe(0)
+        })
     })
 
     describe('rounds if the integer is out of 32-bit signed integer range', () => {
