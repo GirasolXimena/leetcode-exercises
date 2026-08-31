@@ -1,0 +1,8 @@
+{
+  "extends": "@tsconfig/node-ts",
+  "compilerOptions": {
+    "types": [
+      "node"
+    ]
+  }
+}
