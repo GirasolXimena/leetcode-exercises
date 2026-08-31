@@ -9,6 +9,7 @@
     "@tsconfig/node-ts": "^23.6.4",
     "@types/node": "^26.4.0",
     "@vitest/coverage-v8": "^4.1.11",
+    "tsx": "^4.23.13",
     "vitest": "^4.1.11"
   },
   "dependencies": {
