@@ -14,6 +14,8 @@
  */
 
 export function removeDuplicates(nums: number[]): number {
+  if (nums.length === 0) return 0;
+
   let k = 0;
   let i = 0;
   let n = nums[0]

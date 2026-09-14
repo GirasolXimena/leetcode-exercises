@@ -32,4 +32,21 @@ describe('remove duplicates from sorted array', () => {
     expect(k).toBe(5)
     expect(nums).toEqual(result)
   })
+
+  test('returns zero for an empty array', () => {
+    const nums: number[] = []
+
+    expect(removeDuplicates(nums)).toBe(0)
+    expect(nums).toEqual([])
+  })
+
+  test('handles a singleton and an array of only duplicates', () => {
+    const singleton = [4]
+    const duplicates = [2, 2, 2]
+
+    expect(removeDuplicates(singleton)).toBe(1)
+    expect(singleton).toEqual([4])
+    expect(removeDuplicates(duplicates)).toBe(1)
+    expect(duplicates).toEqual([2])
+  })
 })
