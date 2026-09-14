@@ -20,6 +20,18 @@ The tests cover zero, odd- and even-length palindromes, non-palindromes, negativ
 
 <CodeBlock language="ts">{ImplementationSource}</CodeBlock>
 
+:::warning[What is the condition check at the beginning?]
+
+`(x < 0 || x > 2 ** 31 - 1)`
+
+You may be wondering what this `if` statement condition is all about.
+
+This is an example of [Parsing and Boundary Conditions](../essential-concepts/parsing-and-boundaries): we must validate the allowed range before relying on the normal path.
+
+The exercise specifies `signed 32-bit` input. This implementation rejects negative values and values above `2 ** 31 - 1` before converting the number to characters. We must always strive to respect *all* restraints imposed by the problem.
+
+:::
+
 ## Tests
 
 <CodeBlock language="ts">{TestSource}</CodeBlock>

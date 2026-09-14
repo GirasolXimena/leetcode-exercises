@@ -18,4 +18,9 @@ describe('palindromeNumber', () => {
     expect(isPalindrome(10)).toBe(false);
     expect(isPalindrome(123)).toBe(false);
   });
+
+  it('handles even-length palindromes and numbers ending in zero', () => {
+    expect(isPalindrome(1221)).toBe(true);
+    expect(isPalindrome(100)).toBe(false);
+  });
 });

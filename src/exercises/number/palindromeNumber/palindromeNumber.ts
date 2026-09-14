@@ -2,6 +2,8 @@
 
 
 function isPalindrome(x: number): boolean {
+  if (x < 0 || x > 2 ** 31 - 1) return false;
+
   let res = true
   const arr = x.toString().split("");
   for (let i = 0; res === true && i < arr.length; i++) {
