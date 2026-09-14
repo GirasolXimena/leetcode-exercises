@@ -16,10 +16,26 @@ Move every zero to the end of an array while preserving the relative order of no
 
 A write pointer marks the next position for a non-zero value. First compact all non-zero values toward the front, then fill the remaining positions with zeroes. This separates the stable ordering work from the final padding step.
 
-The algorithm takes $O(n)$ time and $O(1)$ extra space. The tests cover empty, all-zero, no-zero, adjacent-zero, and mixed arrays. The benchmark exercises the linear scan with a larger input.
+The algorithm takes $O(n)$ time and $O(1)$ extra space.
+
+This is an example of the [in-place two-pointer pattern](../essential-concepts/in-place-two-pointers).
 
 <CodeBlock language="ts">{ImplementationSource}</CodeBlock>
+
+:::warning[Why not `splice` and `push`?]
+ 
+Ideally, we want to avoid using splice and push because it is `O(n)` and we are already in a loop instead we can just overwrite the next non-zero index with the current non-zero value and then increment the next non-zero index.
+
+`[0,1,2,3,4]` `[0,_,2,3,4]` `[0,2,3,4]`
+
+Removing an item from the middle of an array shifts later elements, and repeating that work can become [quadratic](../essential-concepts/explaining-time-complexity#big-o-notation). 
+
+The new [write-pointer approach](../essential-concepts/write-pointer-approach) copies each non-zero value forward once, then fills the remaining positions with zeroes. This preserves order while reducing the work to one linear pass plus the final fill.
+
+:::
 
 ## Tests
 
 <CodeBlock language="ts">{TestSource}</CodeBlock>
+
+The tests cover empty, all-zero, no-zero, adjacent-zero, and mixed arrays. The benchmark exercises the linear scan with a larger input.
