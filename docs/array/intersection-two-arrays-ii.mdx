@@ -20,6 +20,11 @@ The current search-and-splice approach is easy to follow but can take $O(mn)$ ti
 
 <CodeBlock language="ts">{ImplementationSource}</CodeBlock>
 
+:::warning[Why use `.map` after sorting?]
+
+The algorithm we wrote removes a value from its shorter working array after using it. In order to not unexpectedly mutate the arrays and potentially cause some headache for a future user we must copy both inputs before sorting and splicing those working arrays. We must take care to avoid side effects! 
+:::
+
 ## Tests
 
 <CodeBlock language="ts">{TestSource}</CodeBlock>
