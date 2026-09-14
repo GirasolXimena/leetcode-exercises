@@ -32,4 +32,14 @@ describe('plus one', () => {
     rotate(input, k)
     expect(input).toEqual(result)
   })
+
+  test.each([
+    { input: [1, 2, 3], k: 0, result: [1, 2, 3] },
+    { input: [1, 2, 3], k: 3, result: [1, 2, 3] },
+    { input: [1, 2, 3], k: 8, result: [2, 3, 1] },
+    { input: [], k: 4, result: [] },
+  ])('handles k=$k', ({ input, k, result }) => {
+    rotate(input, k)
+    expect(input).toEqual(result)
+  })
 })
