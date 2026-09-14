@@ -6,7 +6,7 @@
  * Find and return the maximum profit you can achieve.
  */
 
-function calcProfit(acc, price, day, prices) {
+function calcProfit(acc: number, price: number, day: number, prices: number[]): number {
   // greedy algorithm
   const tomorrow = day + 1;
   const tomorrowPrice = prices[tomorrow];
@@ -15,7 +15,7 @@ function calcProfit(acc, price, day, prices) {
   return acc + potentialProfit;
    
     
-};
+}
 
 export function maxProfit(prices: number[]): number {
 return prices.reduce(calcProfit, 0)

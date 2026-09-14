@@ -31,4 +31,13 @@ describe('single number', () => {
     expect(singleNumberSet(input)).toEqual(result)
     expect(singleNumberSetBitwise(input)).toEqual(result)
   })
+
+  test('handles negative values and zero', () => {
+    const input = [-4, 0, -4]
+
+    expect(singleNumber(input)).toBe(0)
+    expect(singleNumberHashTable(input)).toBe(0)
+    expect(singleNumberSet(input)).toBe(0)
+    expect(singleNumberSetBitwise(input)).toBe(0)
+  })
 })

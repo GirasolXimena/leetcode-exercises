@@ -42,4 +42,12 @@ describe('best time to buy and sell stock (pt II)', () => {
 
     expect(maxProfit(prices)).toBe(result)
   })
+
+  test.each([
+    { prices: [], expected: 0 },
+    { prices: [5], expected: 0 },
+    { prices: [3, 3, 3], expected: 0 },
+  ])('returns no profit when prices cannot increase', ({ prices, expected }) => {
+    expect(maxProfit(prices)).toBe(expected)
+  })
 })
