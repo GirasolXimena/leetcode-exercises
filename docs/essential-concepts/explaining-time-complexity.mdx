@@ -1,0 +1,96 @@
+---
+sidebar_position: 1
+---
+
+# Explaining Time Complexity
+
+## What time complexity means
+
+Time complexity describes how the amount of work an algorithm performs changes as its input gets larger.
+
+It does not usually mean the exact number of seconds. A particular runtime depends on the computer, the programming language, and other work happening on the machine. Instead, time complexity gives us a way to compare how algorithms grow.
+
+We use $n$ to represent the size of the input. For an array, $n$ is usually the number of elements. For a string, $n$ is usually the number of characters.
+
+## Big O notation
+
+Big O notation describes the upper growth pattern of an algorithm as the input becomes large. We usually focus on the part that grows fastest and ignore constant details.
+
+For example, an algorithm that performs $3n + 2$ steps is described as $O(n)$. The `3` and `2` matter for real performance, but the input-size pattern is still linear: if the input doubles, the work is roughly doubled.
+
+Common time complexities, from generally easier to scale to generally harder to scale, are:
+
+| Complexity | Name | Example |
+| --- | --- | --- |
+| $O(1)$ | Constant | Reading one array element by index |
+| $O(\log n)$ | Logarithmic | Binary search in a sorted array |
+| $O(n)$ | Linear | Visiting every element once |
+| $O(n \log n)$ | Linearithmic | Efficient comparison-based sorting |
+| $O(n^2)$ | Quadratic | Comparing every pair of elements |
+
+The order matters more than the exact timing. An $O(n^2)$ algorithm may be perfectly acceptable for a small input, but its work grows much faster than an $O(n)$ algorithm as the input grows.
+
+## How to count work
+
+Start by identifying the operations that depend on the input size:
+
+```ts
+for (const item of items) {
+  process(item);
+}
+```
+
+The loop visits each item once, so it performs $O(n)$ work.
+
+Two nested loops usually multiply their work:
+
+```ts
+for (const first of items) {
+  for (const second of items) {
+    compare(first, second);
+  }
+}
+```
+
+For every one of the $n$ first items, the inner loop visits $n$ second items. That gives $n \times n$, or $O(n^2)$ work.
+
+Sequential loops are usually added and then simplified:
+
+```ts
+for (const item of items) {
+  process(item);
+}
+
+for (const item of items) {
+  save(item);
+}
+```
+
+This performs $n + n = 2n$ steps, which simplifies to $O(n)$.
+
+## Time complexity is not the whole story
+
+Space complexity describes the extra memory an algorithm needs as the input grows. An algorithm can use less memory but still be slower if it repeatedly moves or copies data.
+
+For example, the Reverse Polish Notation exercise compares a stack implementation with an in-place implementation. The stack implementation reads each token once, so it takes $O(n)$ time. The in-place implementation repeatedly uses `splice`; removing items near the start of an array can shift many remaining items, producing $O(n^2)$ work for some expressions.
+
+That example shows why we consider both:
+
+- **Time:** How much computational work grows with the input?
+- **Space:** How much additional memory grows with the input?
+- **Behavior:** Does the algorithm mutate its input or preserve it?
+
+The best choice depends on the constraints. A small memory saving is not always worth a large increase in runtime or a surprising mutation of data owned by the caller.
+
+## A practical checklist
+
+When analyzing a new solution:
+
+1. Define what `n` represents.
+2. Count loops and repeated operations involving the input.
+3. Check whether loops are nested or sequential.
+4. Look for hidden work in operations such as array insertion, removal, copying, or sorting.
+5. Count additional data structures to estimate space complexity.
+6. Consider input mutation as part of the function's contract.
+
+For a concrete example, continue with [Evaluate Reverse Polish Notation](../array/evaluate-reverse-polish-notation).

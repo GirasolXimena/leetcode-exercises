@@ -1,0 +1,8 @@
+{
+  "label": "Essential Concepts",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Build the foundations needed to understand algorithm design and performance."
+  }
+}
