@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "test": "vitest",
+    "bench": "vitest bench",
     "new-problem": "npx tsx scripts/new-problem.ts",
     "docusaurus": "docusaurus",
     "start": "docusaurus start --host 0.0.0.0",

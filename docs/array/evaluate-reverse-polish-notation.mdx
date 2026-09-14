@@ -1,0 +1,104 @@
+---
+sidebar_position: 1
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import ImplementationSource from '!!raw-loader!../../src/exercises/array/evaluateReversePolishNotation/evaluateReversePolishNotation.ts';
+import TestSource from '!!raw-loader!../../src/exercises/array/evaluateReversePolishNotation/evaluateReversePolishNotation.test.ts';
+
+# Evaluate Reverse Polish Notation
+
+:::tip[Time Complexity]
+
+For a beginner-friendly introduction to the notation used here, read [Explaining Time Complexity](../essential-concepts/explaining-time-complexity).
+Evaluate an arithmetic expression written in **Reverse Polish Notation (RPN)**.
+
+:::
+
+## The problem
+
+Evaluate an arithmetic expression written in **Reverse Polish Notation (RPN)**.
+
+In ordinary arithmetic, an operation is written between its numbers:
+
+```text
+2 + 1
+```
+
+In RPN, the operator comes after its numbers:
+
+```text
+2 1 +
+```
+
+The input is an array of strings. Each string is either an integer or one of these operators:
+
+- `+` for addition
+- `-` for subtraction
+- `*` for multiplication
+- `/` for division, truncated toward zero
+
+The expression is valid, so every operator has two numbers available before it. For example:
+
+```text
+["2", "1", "+", "3", "*"]
+```
+
+This means `(2 + 1) * 3`, so the result is `9`.
+
+## Why a stack fits the problem
+
+A stack follows **last in, first out** order. That is exactly what RPN needs: when an operator appears, the two most recent available values are its operands.
+
+For `4 13 5 / +`:
+
+1. Push `4`.
+2. Push `13`.
+3. Push `5`.
+4. Read `/`, so pop `5` and then `13`. Calculate `13 / 5`, which is `2`, and push `2`.
+5. Read `+`, so pop `2` and then `4`. Calculate `4 + 2`, which is `6`.
+
+The order of the two pops matters. If `b` is popped first and `a` is popped second, the operation must be `a operator b`. Reversing them would produce incorrect results for subtraction and division.
+
+The stack solution reads each token once. Each token is pushed, or causes two pops and one push, so its time complexity is $O(n)$.
+
+## Two implementations
+
+This exercise contains two implementations:
+
+- `evalRPNStack` uses a numeric stack and leaves the input token array unchanged.
+- `evalRPNInPlace` replaces each group of two numbers and an operator with its result inside the token array.
+
+The in-place version is useful for comparison, but it repeatedly calls `splice`. When the expression is long, removing values near the beginning of an array can shift many remaining values. That can make the approach much slower than the stack version. It also converts intermediate results to strings and parses them again.
+
+The stack implementation keeps intermediate values as numbers. The `actions` map gives each supported operator one small function, which keeps the main loop focused on the repeated stack steps instead of duplicating arithmetic logic in several branches.
+
+<CodeBlock language="ts">{ImplementationSource}</CodeBlock>
+
+## How the tests are organized
+
+The tests begin with a table of input and expected output. This keeps several related examples in one test while making the cases easy to scan:
+
+- A basic expression checks addition and multiplication.
+- A division expression checks that integer truncation is applied.
+- A longer expression checks that many operations can be chained.
+- A single number checks the smallest valid input.
+- A negative division checks truncation toward zero for negative results.
+
+Each example is sent to both implementations. Testing both with the same expected answer helps show that the faster stack version preserves the behavior of the comparison implementation.
+
+The final two tests check each function's input contract:
+
+- The stack implementation must not mutate its input, so the original token array is still available after evaluation.
+- The in-place implementation is explicitly expected to reduce its input to one result token.
+
+These are important tests because correctness is more than returning the right number. A function can calculate the right result and still surprise its caller by changing an array that the caller expected to keep.
+
+<CodeBlock language="ts">{TestSource}</CodeBlock>
+
+## Complexity
+
+For `n` tokens, the stack implementation takes $O(n)$ [time](../essential-concepts/explaining-time-complexity). In the worst case, the stack uses `O(n)` additional space because many numbers may be waiting for an operator.
+
+The in-place implementation uses less separate storage, but its repeated array splicing can require `O(n^2)` work on unfavorable expressions. Lower auxiliary storage does not automatically make an algorithm faster: the cost of moving existing array elements can dominate the calculation.
+
