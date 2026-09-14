@@ -1,0 +1,25 @@
+---
+sidebar_position: 6
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import ImplementationSource from '!!raw-loader!../../src/exercises/array/isValidSudoku/isValidSudoku.ts';
+import TestSource from '!!raw-loader!../../src/exercises/array/isValidSudoku/isValidSudoku.test.ts';
+
+# Valid Sudoku
+
+## The problem
+
+Check whether a partially filled 9 by 9 Sudoku board is valid. A digit may appear once in each row, column, and 3 by 3 box. Empty cells are represented by `.`.
+
+## Approach
+
+The implementations track values seen in rows, columns, and boxes. A duplicate in any one of those collections makes the board invalid immediately. The file demonstrates map, set-like lookup-array, and fixed-array strategies.
+
+The board has fixed dimensions, so each implementation is effectively $O(1)$ under the problem constraints. Tests cover a valid board and duplicates in a row, column, and box.
+
+<CodeBlock language="ts">{ImplementationSource}</CodeBlock>
+
+## Tests
+
+<CodeBlock language="ts">{TestSource}</CodeBlock>

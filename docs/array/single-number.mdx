@@ -1,0 +1,25 @@
+---
+sidebar_position: 12
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import ImplementationSource from '!!raw-loader!../../src/exercises/array/singleNumber/singleNumber.ts';
+import TestSource from '!!raw-loader!../../src/exercises/array/singleNumber/singleNumber.test.ts';
+
+# Single Number
+
+## The problem
+
+Every value in an integer array appears twice except one. Find the value that appears once.
+
+## Approaches
+
+The file compares four strategies: toggling a map entry, counting with a map, comparing set and total sums, and XOR. XOR is especially useful because `x ^ x` is zero and `x ^ 0` is `x`, so paired values cancel while the unique value remains.
+
+The first three approaches use $O(n)$ extra space. XOR uses $O(1)$ space and $O(n)$ time. Tests cover ordinary examples, a singleton, negative values, and zero. The benchmark compares all four strategies on a larger valid input.
+
+<CodeBlock language="ts">{ImplementationSource}</CodeBlock>
+
+## Tests
+
+<CodeBlock language="ts">{TestSource}</CodeBlock>

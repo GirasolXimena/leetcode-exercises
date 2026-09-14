@@ -1,0 +1,25 @@
+---
+sidebar_position: 5
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import ImplementationSource from '!!raw-loader!../../src/exercises/array/intersectionTwoArraysII/intersectionTwoArraysII.ts';
+import TestSource from '!!raw-loader!../../src/exercises/array/intersectionTwoArraysII/intersectionTwoArraysII.test.ts';
+
+# Intersection of Two Arrays II
+
+## The problem
+
+Return the values shared by two arrays, including duplicates. If a value appears twice in both arrays, it appears twice in the result; extra copies are ignored.
+
+## Approach
+
+Iterate through the longer array and search the shorter one. When a match is found, remove that occurrence from the working copy so it cannot be reused. Copying the inputs is deliberate: the caller's arrays should remain unchanged.
+
+The current search-and-splice approach is easy to follow but can take $O(mn)$ time. It uses $O(min(m,n))$ working space plus the result. Tests check duplicate counts, empty input, and input preservation.
+
+<CodeBlock language="ts">{ImplementationSource}</CodeBlock>
+
+## Tests
+
+<CodeBlock language="ts">{TestSource}</CodeBlock>

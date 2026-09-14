@@ -1,0 +1,8 @@
+{
+  "label": "Exercises - String",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Practice parsing, reversing, and transforming strings."
+  }
+}

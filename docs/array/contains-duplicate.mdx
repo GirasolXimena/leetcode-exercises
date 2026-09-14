@@ -1,0 +1,25 @@
+---
+sidebar_position: 4
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import ImplementationSource from '!!raw-loader!../../src/exercises/array/containsDuplicate/containsDuplicate.ts';
+import TestSource from '!!raw-loader!../../src/exercises/array/containsDuplicate/containsDuplicate.test.ts';
+
+# Contains Duplicate
+
+## The problem
+
+Return `true` when an integer appears at least twice in an array. Return `false` when every value is unique.
+
+## Approach
+
+Keep a `Set` of values already seen. Before adding each number, check whether the set already contains it. The function can stop immediately when it finds a duplicate, which is useful when the duplicate appears early.
+
+The time complexity is $O(n)$ on average and the additional space complexity is $O(n)$. Tests cover duplicates at different positions, unique values, empty and single-item arrays, and negative values.
+
+<CodeBlock language="ts">{ImplementationSource}</CodeBlock>
+
+## Tests
+
+<CodeBlock language="ts">{TestSource}</CodeBlock>

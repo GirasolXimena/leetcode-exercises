@@ -1,0 +1,25 @@
+---
+sidebar_position: 3
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import ImplementationSource from '!!raw-loader!../../src/exercises/array/buildArrayStackOperations/buildArrayStackOperations.ts';
+import TestSource from '!!raw-loader!../../src/exercises/array/buildArrayStackOperations/buildArrayStackOperations.test.ts';
+
+# Build an Array With Stack Operations
+
+## The problem
+
+Numbers arrive in order from `1` through `n`. Return `Push` and `Pop` operations that leave exactly the requested target array in a stack. Target values are increasing and valid under the exercise constraints.
+
+## Approach
+
+For each value up to the target's last value, push it. If the value is not in the target, immediately pop it. A value that belongs remains in the stack. The output records the same decisions, so the operation sequence and final stack stay synchronized.
+
+For target length $n$, membership checks make the current implementation $O(n^2)$ in the worst case. The operation list uses $O(n)$ space. Tests cover consecutive targets, gaps, later starting values, and an empty target.
+
+<CodeBlock language="ts">{ImplementationSource}</CodeBlock>
+
+## Tests
+
+<CodeBlock language="ts">{TestSource}</CodeBlock>

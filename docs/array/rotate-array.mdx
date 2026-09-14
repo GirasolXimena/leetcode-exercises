@@ -1,0 +1,25 @@
+---
+sidebar_position: 10
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import ImplementationSource from '!!raw-loader!../../src/exercises/array/rotateArray/rotateArray.ts';
+import TestSource from '!!raw-loader!../../src/exercises/array/rotateArray/rotateArray.test.ts';
+
+# Rotate Array
+
+## The problem
+
+Rotate an array to the right by `k` steps in place. Values that move past the end wrap around to the beginning.
+
+## Approach
+
+Only `k % nums.length` steps change the result, so large step counts are normalized first. The implementation builds the rotated order and writes it back into the original array, preserving the in-place API.
+
+The current implementation takes $O(n)$ time and uses $O(n)$ temporary space. Tests cover no rotation, a full rotation, more steps than the length, an empty array, and ordinary examples.
+
+<CodeBlock language="ts">{ImplementationSource}</CodeBlock>
+
+## Tests
+
+<CodeBlock language="ts">{TestSource}</CodeBlock>
