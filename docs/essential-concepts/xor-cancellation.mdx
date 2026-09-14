@@ -1,0 +1,31 @@
+---
+sidebar_position: 4
+---
+
+# XOR Cancellation
+
+## The useful rules
+
+Bitwise XOR compares each binary bit and returns `1` when the bits differ. Three rules make it useful for paired values:
+
+- `x ^ x` is `0`.
+- `x ^ 0` is `x`.
+- XOR can be regrouped and reordered without changing the result.
+
+Therefore, when every value appears twice except one, XORing the whole array cancels every pair and leaves the unique value.
+
+```ts
+let result = 0;
+
+for (const value of values) {
+  result ^= value;
+}
+```
+
+## Complexity and limits
+
+The loop takes $O(n)$ time and uses $O(1)$ additional space. It is a good example of using the problem's guarantee to remove the need for a map or set.
+
+JavaScript bitwise operators work on signed 32-bit integer representations. The technique is therefore appropriate when the exercise's integer constraints fit that representation. For other numeric ranges, a map or set may be clearer and safer.
+
+The [Single Number](../array/single-number) exercise compares XOR with map and set approaches. Its benchmark makes the tradeoff measurable, while its tests confirm that all strategies return the same value.
