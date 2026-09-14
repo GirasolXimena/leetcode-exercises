@@ -19,14 +19,10 @@ export function reverseInteger(x: number): number {
           return 0
 
       }
-      if (reverseInt < -(2 ** 31) / 10 || (reverseInt === -(2 ** 31) / 10 && pop < -8)) {
-          return 0
-      }
-
       reverseInt = reverseInt * 10 + pop
   }
 
 
-  return x > 0 ? reverseInt : -reverseInt
+    return x < 0 ? -reverseInt : reverseInt
 }
 
