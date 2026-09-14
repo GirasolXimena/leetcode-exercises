@@ -1,0 +1,25 @@
+---
+sidebar_position: 3
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import ImplementationSource from '!!raw-loader!../../src/exercises/string/reverseString/reverseString.ts';
+import TestSource from '!!raw-loader!../../src/exercises/string/reverseString/reverseString.test.ts';
+
+# Reverse String
+
+## The problem
+
+Reverse a string. The exercise also demonstrates reversing an array of characters in place.
+
+## Approach
+
+Swap the first and last characters, then move inward until the pointers meet. Each swap fixes two positions, so the loop only needs to visit half of the input. The module version stores the result as a string; the direct function preserves the observable mutation when given an array.
+
+The algorithm takes $O(n)$ time. The direct string path uses $O(n)$ space to create characters, while an existing character array is reversed in place. Tests cover direct strings, empty input, arrays, and the module API.
+
+<CodeBlock language="ts">{ImplementationSource}</CodeBlock>
+
+## Tests
+
+<CodeBlock language="ts">{TestSource}</CodeBlock>
