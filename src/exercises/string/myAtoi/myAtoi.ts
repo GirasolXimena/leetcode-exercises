@@ -43,7 +43,7 @@ const extractInteger = (s: string): string => {
 // after extracting integers the string will never be NaN
 const convertToNumber =(s: string): number => {
     let result = Number(s)
-    return result
+    return result === 0 ? 0 : result
 }
 
 export const myAtoi = (s: string): number => {
@@ -52,5 +52,6 @@ export const myAtoi = (s: string): number => {
     s = removeLeadingZeroes(s)
     s = extractInteger(s)
     const num = convertToNumber(s)
-    return clamp32Bit(isPositive ? num : -num)
+    const result = clamp32Bit(isPositive ? num : -num)
+    return result === 0 ? 0 : result
 }

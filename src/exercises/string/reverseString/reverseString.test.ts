@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, test, bench } from 'vitest'
+import { beforeEach, describe, expect, test } from 'vitest'
 import { faker } from "@faker-js/faker"
 
 
@@ -17,5 +17,17 @@ describe('write a function that reverses a string', () => {
             reverseStringModule.reverse()
             expect(reverseStringModule.s).toBe(reverseCopy)
         })
+    })
+
+    test('reverses a string directly', () => {
+        expect(reverseString('hello')).toBe('olleh')
+        expect(reverseString('')).toBe('')
+    })
+
+    test('reverses an array in place and returns the result', () => {
+        const characters = ['a', 'b', 'c', 'd']
+
+        expect(reverseString(characters)).toBe('dcba')
+        expect(characters).toEqual(['d', 'c', 'b', 'a'])
     })
 })

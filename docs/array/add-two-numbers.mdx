@@ -1,0 +1,25 @@
+---
+sidebar_position: 1
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import ImplementationSource from '!!raw-loader!../../src/exercises/array/addTwoNumbers/addTwoNumbers.ts';
+import TestSource from '!!raw-loader!../../src/exercises/array/addTwoNumbers/addTwoNumbers.test.ts';
+
+# Add Two Numbers
+
+## The problem
+
+Two non-negative integers are stored in linked lists. The digits are reversed, so `[2, 4, 3]` represents `342`. Add the numbers and return a linked list in the same format. Each node stores one digit, and a carry may continue after one list ends.
+
+## Approach
+
+Walk through both lists together. Add the current digits and the carry, store `sum % 10`, and carry `Math.floor(sum / 10)` to the next position. Continue while either list or the carry remains. This avoids converting large linked-list values into JavaScript numbers.
+
+The solution takes $O(max(m,n))$ time and creates $O(max(m,n))$ result nodes. The tests cover equal and unequal lengths, carries, zero, and a carry that creates a new leading digit.
+
+<CodeBlock language="ts">{ImplementationSource}</CodeBlock>
+
+## Tests
+
+<CodeBlock language="ts">{TestSource}</CodeBlock>

@@ -1,0 +1,25 @@
+---
+sidebar_position: 2
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import ImplementationSource from '!!raw-loader!../../src/exercises/string/reverseInteger/reverseInteger.ts';
+import TestSource from '!!raw-loader!../../src/exercises/string/reverseInteger/reverseInteger.test.ts';
+
+# Reverse Integer
+
+## The problem
+
+Reverse the decimal digits of a signed 32-bit integer. Return zero if the reversed value would leave the allowed range.
+
+## Approach
+
+Repeatedly take the last digit with `% 10`, remove it from the working number, and append it to the result by multiplying the result by ten. Before appending, check whether another digit would overflow the limit.
+
+The algorithm takes $O(d)$ time and $O(1)$ space for $d$ digits. Tests cover positive and negative values, zero, trailing zeroes, ordinary reversal, and overflow.
+
+<CodeBlock language="ts">{ImplementationSource}</CodeBlock>
+
+## Tests
+
+<CodeBlock language="ts">{TestSource}</CodeBlock>

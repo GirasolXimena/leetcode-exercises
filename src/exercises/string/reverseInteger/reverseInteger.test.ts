@@ -40,4 +40,13 @@ describe('reverse integer', () => {
       expect(reverseInteger(123)).toBe(321)
     })
   })
+
+  test.each([
+    { input: 0, expected: 0 },
+    { input: 120, expected: 21 },
+    { input: -120, expected: -21 },
+    { input: 7, expected: 7 },
+  ])('reverses $input', ({ input, expected }) => {
+    expect(reverseInteger(input)).toBe(expected)
+  })
 })

@@ -1,0 +1,25 @@
+---
+sidebar_position: 2
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import ImplementationSource from '!!raw-loader!../../src/exercises/array/bestTimeBuySellStockII/bestTimeBuySellStockII.ts';
+import TestSource from '!!raw-loader!../../src/exercises/array/bestTimeBuySellStockII/bestTimeBuySellStockII.test.ts';
+
+# Best Time to Buy and Sell Stock II
+
+## The problem
+
+Given daily prices, make as much profit as possible while holding at most one share. You may complete multiple transactions, but a transaction must buy before it sells.
+
+## Approach
+
+Every positive increase from one day to the next can be collected. Adding `tomorrowPrice - price` whenever tomorrow is higher is equivalent to holding through a rising run, and it naturally skips decreases. The algorithm is greedy because every profitable adjacent increase is available without preventing a later transaction.
+
+The scan takes $O(n)$ time and $O(1)$ extra space. Tests cover rising, falling, flat, empty, and one-day prices.
+
+<CodeBlock language="ts">{ImplementationSource}</CodeBlock>
+
+## Tests
+
+<CodeBlock language="ts">{TestSource}</CodeBlock>

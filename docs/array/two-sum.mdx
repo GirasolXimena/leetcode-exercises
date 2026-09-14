@@ -1,0 +1,25 @@
+---
+sidebar_position: 13
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import ImplementationSource from '!!raw-loader!../../src/exercises/array/twoSum/twoSum.ts';
+import TestSource from '!!raw-loader!../../src/exercises/array/twoSum/twoSum.test.ts';
+
+# Two Sum
+
+## The problem
+
+Find two different array positions whose values add to a target. Return their original indices, not their sorted positions.
+
+## Approach
+
+The implementation keeps each number with its original index, sorts candidate pairs by value, and searches from large and small ends. Storing the index alongside each value is essential because sorting changes positions. The input is copied by `map`, so it remains unchanged.
+
+The nested search is $O(n^2)$ in the worst case and the candidate list uses $O(n)$ space. Tests cover ordinary pairs, duplicates, no solution, negative values, and input preservation.
+
+<CodeBlock language="ts">{ImplementationSource}</CodeBlock>
+
+## Tests
+
+<CodeBlock language="ts">{TestSource}</CodeBlock>

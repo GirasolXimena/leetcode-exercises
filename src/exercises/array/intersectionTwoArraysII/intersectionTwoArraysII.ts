@@ -39,7 +39,9 @@ export function intersect(nums1: number[], nums2: number[]): number[] {
 
   // faster to iterate through long array and remove numbers from short array
   // so sort by arr.length to construct args order
-  const [long, short] = [nums1, nums2].sort((a, b) => b.length - a.length);
+  const [long, short] = [nums1, nums2]
+    .sort((a, b) => b.length - a.length)
+    .map((nums) => [...nums]);
   return constructIntersection(long, short);
 
 };

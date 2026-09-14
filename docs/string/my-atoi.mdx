@@ -1,0 +1,37 @@
+---
+sidebar_position: 1
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import ImplementationSource from '!!raw-loader!../../src/exercises/string/myAtoi/myAtoi.ts';
+import TestSource from '!!raw-loader!../../src/exercises/string/myAtoi/myAtoi.test.ts';
+
+# String to Integer (atoi)
+
+## The problem
+
+Read a signed integer from the beginning of a string. Ignore leading whitespace, accept an optional sign, stop at the first non-digit, and clamp the result to the signed 32-bit range.
+
+## Approach
+
+The implementation removes leading whitespace, determines the sign, removes leading zeroes, extracts consecutive digits, converts them, and clamps the result. Keeping these stages separate makes each parsing rule visible to a beginner.
+
+The scan is $O(n)$ time and the intermediate strings use $O(n)$ space. Tests cover whitespace, signs, zeroes, trailing text, malformed signs, exact boundaries, and overflow.
+
+<CodeBlock language="ts">{ImplementationSource}</CodeBlock>
+
+The full "staged parsing" approach is described in [Parsing and Boundary Conditions](../essential-concepts/parsing-and-boundaries).
+
+:::warning[Why zero `result === 0 ? 0 : result`]
+
+It might seem silly to use a ternary here, but there is a good reason.
+
+JavaScript has both `0` and `-0`. A malformed signed input such as `- 12` should produce the ordinary integer result `0`, not a negative-zero value that can behave differently with strict identity checks. The conversion now normalizes zero both before and after applying the sign.
+
+
+
+:::
+
+## Tests
+
+<CodeBlock language="ts">{TestSource}</CodeBlock>

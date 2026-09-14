@@ -23,6 +23,9 @@ export function evalRPNInPlace(tokens: string[]): number {
             let first = Number(tokens[i - 2])
             const second = Number(tokens[i - 1])
 
+        /*
+            // replace switch statement with actions object
+            // it helps to avoid the switch statement and makes it easier to add new operations in the future
             switch (tokens[i]) {
                 case "+":
                     result = first + second;
@@ -38,6 +41,8 @@ export function evalRPNInPlace(tokens: string[]): number {
                     break;
 
             }
+        */
+            result = actions[tokens[i]](first, second)
 
             // replace operation we did with result
             tokens.splice(i - 2, 3, String(result))
@@ -48,6 +53,7 @@ export function evalRPNInPlace(tokens: string[]): number {
             i = 0
 
         }
+            
 
     }
 
@@ -60,7 +66,7 @@ export function evalRPNStack(tokens: string[]): number {
 
     for (let i = 0; i < tokens.length; i++) {
         const token = tokens[i];
-        if (token in actions) {
+        if (Object.hasOwn(actions, token)) {
             const b = stack.pop()!;
             const a = stack.pop()!;
             result = actions[token](a, b);

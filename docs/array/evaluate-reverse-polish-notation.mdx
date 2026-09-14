@@ -11,7 +11,6 @@ import TestSource from '!!raw-loader!../../src/exercises/array/evaluateReversePo
 :::tip[Time Complexity]
 
 For a beginner-friendly introduction to the notation used here, read [Explaining Time Complexity](../essential-concepts/explaining-time-complexity).
-Evaluate an arithmetic expression written in **Reverse Polish Notation (RPN)**.
 
 :::
 
@@ -74,6 +73,15 @@ The in-place version is useful for comparison, but it repeatedly calls `splice`.
 The stack implementation keeps intermediate values as numbers. The `actions` map gives each supported operator one small function, which keeps the main loop focused on the repeated stack steps instead of duplicating arithmetic logic in several branches.
 
 <CodeBlock language="ts">{ImplementationSource}</CodeBlock>
+
+:::warning[Why use `Object.hasOwn` instead of `in`]
+
+Checking our `actions` object's own properties keeps the operator table limited to the objects actual defined properties, in this case we defined
+`+`, `-`, `*`, and `/`. 
+
+It also helps to avoid bugs, `in` also considers properties inherited through an object's prototype, so malformed input such as a prototype property could be mistaken for a supported operator. 
+
+:::
 
 ## How the tests are organized
 

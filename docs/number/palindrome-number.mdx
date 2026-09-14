@@ -1,18 +1,37 @@
 ---
-sidebar_position: 6
+sidebar_position: 1
 ---
 
 import CodeBlock from '@theme/CodeBlock';
-import MyComponentSource from '!!raw-loader!../../src/exercises/number/palindromeNumber/palindromeNumber.ts';
-import MyTestSource from '!!raw-loader!../../src/exercises/number/palindromeNumber/palindromeNumber.test.ts';
+import ImplementationSource from '!!raw-loader!../../src/exercises/number/palindromeNumber/palindromeNumber.ts';
+import TestSource from '!!raw-loader!../../src/exercises/number/palindromeNumber/palindromeNumber.test.ts';
 
-# 9. Palindrome number
+# Palindrome Number
 
-## Problem Description
+## The problem
 
-## Solution
+Return `true` when an integer reads the same from left to right and right to left. Negative values and values outside the signed 32-bit range are rejected.
 
-<CodeBlock language="ts">{MyComponentSource}</CodeBlock>
+## Approach
 
-## Testing
-<CodeBlock language="ts">{MyTestSource}</CodeBlock>
+Convert the number to characters and compare mirrored positions. Stop as soon as a pair differs. The algorithm takes $O(d)$ time and $O(d)$ space for a number with $d$ digits.
+
+The tests cover zero, odd- and even-length palindromes, non-palindromes, negative values, trailing zeroes, and range boundaries.
+
+<CodeBlock language="ts">{ImplementationSource}</CodeBlock>
+
+:::warning[What is the condition check at the beginning?]
+
+`(x < 0 || x > 2 ** 31 - 1)`
+
+You may be wondering what this `if` statement condition is all about.
+
+This is an example of [Parsing and Boundary Conditions](../essential-concepts/parsing-and-boundaries): we must validate the allowed range before relying on the normal path.
+
+The exercise specifies `signed 32-bit` input. This implementation rejects negative values and values above `2 ** 31 - 1` before converting the number to characters. We must always strive to respect *all* restraints imposed by the problem.
+
+:::
+
+## Tests
+
+<CodeBlock language="ts">{TestSource}</CodeBlock>

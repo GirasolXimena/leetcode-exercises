@@ -1,0 +1,31 @@
+---
+sidebar_position: 9
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import ImplementationSource from '!!raw-loader!../../src/exercises/array/removeDuplicatesSortedArray/removeDuplicatesSortedArray.ts';
+import TestSource from '!!raw-loader!../../src/exercises/array/removeDuplicatesSortedArray/removeDuplicatesSortedArray.test.ts';
+
+# Remove Duplicates From Sorted Array
+
+## The problem
+
+Given a sorted array, keep one copy of each value in place and return the number of unique values. Only the first returned portion of the array matters.
+
+## Approach
+
+A write pointer records where the next new value belongs. Because the input is sorted, comparing the current value with the last unique value is enough; no set is needed.
+
+The scan takes $O(n)$ time and $O(1)$ extra space. Tests cover repeated values, an empty array, a singleton, and an array containing one unique value.
+
+<CodeBlock language="ts">{ImplementationSource}</CodeBlock>
+
+:::warning[Why empty input is handled first]
+
+The algorithm needs a first value as the initial unique value. An empty array has no such value, in this case we decide it should return `0`.
+
+:::
+
+## Tests
+
+<CodeBlock language="ts">{TestSource}</CodeBlock>

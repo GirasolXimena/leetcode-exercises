@@ -32,4 +32,16 @@ describe('two sum', () => {
     // they are each individually bigger than 3
     expect(twoSum(nums, target)).toBeUndefined()
   })
+
+  test('finds a pair containing negative and zero values', () => {
+    expect(twoSum([-3, 4, 0, 7], 1)).toEqual(expect.arrayContaining([0, 1]))
+  })
+
+  test('does not mutate the input array while sorting candidates', () => {
+    const nums = [3, 2, 4]
+
+    twoSum(nums, 6)
+
+    expect(nums).toEqual([3, 2, 4])
+  })
 })

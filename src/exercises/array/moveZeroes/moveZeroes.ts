@@ -11,16 +11,26 @@
  Do not return anything, modify nums in-place instead.
  */
  export function moveZeroes(nums: number[]): void {
-  let i = 0;
-  let j = 0;
+  let nextNonZero = 0;
 
-  while(i <= nums.length) {
-    if(nums[j] === 0) {
-      nums.splice(j, 1);
-      nums.push(0)
-    } else {
-      j++
+  for (let num = 0; num < nums.length; num++) {
+    if (nums[num] !== 0) {
+      /**
+       * instead of doing:
+       * nums.splice(j, 1);
+       * nums.push(0)
+       * 
+       * we can do:
+       * nums[nextNonZero] = nums[num];
+       */
+      nums[nextNonZero] = nums[num];
+      nextNonZero++;
     }
-    i++
+
+  }
+
+  while (nextNonZero < nums.length) {
+    nums[nextNonZero] = 0;
+    nextNonZero++;
   }
 };

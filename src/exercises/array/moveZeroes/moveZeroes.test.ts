@@ -20,4 +20,14 @@ describe('move zeroes', () => {
     moveZeroes(nums);
     expect(nums).toEqual(result)
   })
+
+  test.each([
+    { input: [], result: [] },
+    { input: [1, 2, 3], result: [1, 2, 3] },
+    { input: [0, 0, 0], result: [0, 0, 0] },
+    { input: [1, 0, 2, 0, 3], result: [1, 2, 3, 0, 0] },
+  ])('handles $input', ({ input, result }) => {
+    moveZeroes(input)
+    expect(input).toEqual(result)
+  })
 })

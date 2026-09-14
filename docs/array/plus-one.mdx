@@ -1,0 +1,31 @@
+---
+sidebar_position: 8
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import ImplementationSource from '!!raw-loader!../../src/exercises/array/plusOne/plusOne.ts';
+import TestSource from '!!raw-loader!../../src/exercises/array/plusOne/plusOne.test.ts';
+
+# Plus One
+
+## The problem
+
+An array stores the digits of a non-negative integer from most significant to least significant. Add one and return the resulting digits.
+
+## Approach
+
+Start at the last digit. A digit below nine can be incremented and ends the process. A nine becomes zero and carries into the previous position. If every digit is nine, prepend one.
+
+The time complexity is $O(n)$ in the all-nine case and the extra space is $O(1)$ aside from a possible new leading digit. Tests cover ordinary increments, carries through zero, zero, and all nines.
+
+<CodeBlock language="ts">{ImplementationSource}</CodeBlock>
+:::warning[Check Your Boundaries]
+
+The carry logic checks `i === 0` to identify the first digit. Testing `!digits[i - 1]` would be unsafe because the digit `0` is falsy; an ordinary `0` before a `9` could be mistaken for the beginning of the array. The index check describes the actual condition directly and is covered by the `[1, 0, 9]` test.
+
+This is a [boundary-condition](../essential-concepts/parsing-and-boundaries) lesson: use an explicit structural check when zero is a valid value.
+:::
+
+## Tests
+
+<CodeBlock language="ts">{TestSource}</CodeBlock>

@@ -1,0 +1,25 @@
+---
+sidebar_position: 11
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import ImplementationSource from '!!raw-loader!../../src/exercises/array/rotateImageRight/rotateImageRight.ts';
+import TestSource from '!!raw-loader!../../src/exercises/array/rotateImageRight/rotateImageRight.test.ts';
+
+# Rotate Image Right
+
+## The problem
+
+Rotate a square matrix 90 degrees clockwise in place. For example, the top row becomes the right column.
+
+## Approach
+
+The implementation performs layer-by-layer swaps. Each outer ring is rotated inward until every layer has moved, without allocating another matrix.
+
+For an $n$ by $n$ matrix, each cell is visited a constant number of times, so the time complexity is $O(n^2)$ and the extra space is $O(1)$. Tests cover 3 by 3 and 4 by 4 matrices.
+
+<CodeBlock language="ts">{ImplementationSource}</CodeBlock>
+
+## Tests
+
+<CodeBlock language="ts">{TestSource}</CodeBlock>

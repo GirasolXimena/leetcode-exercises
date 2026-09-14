@@ -1,0 +1,40 @@
+---
+sidebar_position: 2
+---
+
+# In-Place Algorithms and Two Pointers
+
+## What in place means
+
+An in-place algorithm changes the input data structure instead of creating a second structure of the same size. It may still use a few variables or a small temporary value. In-place does not automatically mean faster; an algorithm can save memory while repeatedly shifting many array elements.
+
+## The write-pointer pattern
+
+For a focused explanation of the pattern, see [The Write-Pointer Approach](./write-pointer-approach).
+
+A write pointer records where the next accepted value should go. A read operation scans the input once:
+
+```ts
+let write = 0;
+
+for (const value of values) {
+  if (keep(value)) {
+    values[write] = value;
+    write++;
+  }
+}
+```
+
+This pattern is useful when values can be compacted while preserving their order. The write position never moves backward, so the scan is usually $O(n)$ time and $O(1)$ extra space.
+
+## Why array removal can be expensive
+
+Removing an item from the middle of a JavaScript array may shift every item after it. A single removal can be $O(n)$. Repeating that operation for many zeroes or many rotations can become $O(n^2)$.
+
+The [Move Zeroes](../array/move-zeroes) exercise uses a write pointer to move non-zero values forward and then fills the remaining positions with zeroes. The [Rotate Array](../array/rotate-array) exercise normalizes the number of steps and writes the final order once instead of removing one item per step.
+
+## Mutation is part of the contract
+
+An in-place function is expected to modify its input, but a function that only needs temporary bookkeeping should avoid mutating caller-owned data. The [Intersection of Two Arrays II](../array/intersection-two-arrays-ii) exercise copies its inputs before using `splice`, so it can remove working values without changing the caller's arrays.
+
+When testing an in-place algorithm, check both the returned value and the final input array. When testing a non-mutating algorithm, save the original input and verify it is unchanged.

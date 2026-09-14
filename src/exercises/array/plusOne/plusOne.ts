@@ -27,7 +27,7 @@ export function plusOne(digits: number[]): number[] {
       // eg: [9,9] => [1,0,0]
       digits[i] = 0;
   
-      if(!digits[i-1]) {
+        if(i === 0) {
         digits.unshift(1)
         // we reached end and can break the loop
         // so we don't increment the new '1' we added

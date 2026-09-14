@@ -42,4 +42,13 @@ describe('plus one', () => {
     const result = [3,8,0,0,0]
     expect(plusOne(input)).toEqual(result)
   })
+
+  test('increments a zero digit before a nine', () => {
+    expect(plusOne([1, 0, 9])).toEqual([1, 1, 0])
+  })
+
+  test('handles zero and an array containing only nines', () => {
+    expect(plusOne([0])).toEqual([1])
+    expect(plusOne([9, 9, 9])).toEqual([1, 0, 0, 0])
+  })
 })

@@ -40,7 +40,7 @@ export function singleNumber(nums: number[]): number {
     }
   })
 
-  return dictionary.entries().next().value[0]
+  return dictionary.keys().next().value ?? 0
 };
 
 /**
