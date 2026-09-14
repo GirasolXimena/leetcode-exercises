@@ -74,7 +74,7 @@ The stack implementation keeps intermediate values as numbers. The `actions` map
 
 <CodeBlock language="ts">{ImplementationSource}</CodeBlock>
 
-:::danger[Why use `Object.hasOwn` instead of `in`]
+:::warning[Why use `Object.hasOwn` instead of `in`]
 
 Checking our `actions` object's own properties keeps the operator table limited to the objects actual defined properties, in this case we defined
 `+`, `-`, `*`, and `/`. 

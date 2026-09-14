@@ -20,6 +20,12 @@ The scan takes $O(n)$ time and $O(1)$ extra space. Tests cover repeated values, 
 
 <CodeBlock language="ts">{ImplementationSource}</CodeBlock>
 
+:::warning[Why empty input is handled first]
+
+The algorithm needs a first value as the initial unique value. An empty array has no such value, in this case we decide it should return `0`.
+
+:::
+
 ## Tests
 
 <CodeBlock language="ts">{TestSource}</CodeBlock>
