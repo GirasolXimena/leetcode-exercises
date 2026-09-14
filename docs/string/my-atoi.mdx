@@ -20,6 +20,18 @@ The scan is $O(n)$ time and the intermediate strings use $O(n)$ space. Tests cov
 
 <CodeBlock language="ts">{ImplementationSource}</CodeBlock>
 
+The full "staged parsing" approach is described in [Parsing and Boundary Conditions](../essential-concepts/parsing-and-boundaries).
+
+:::warning[Why zero `result === 0 ? 0 : result`]
+
+It might seem silly to use a ternary here, but there is a good reason.
+
+JavaScript has both `0` and `-0`. A malformed signed input such as `- 12` should produce the ordinary integer result `0`, not a negative-zero value that can behave differently with strict identity checks. The conversion now normalizes zero both before and after applying the sign.
+
+
+
+:::
+
 ## Tests
 
 <CodeBlock language="ts">{TestSource}</CodeBlock>

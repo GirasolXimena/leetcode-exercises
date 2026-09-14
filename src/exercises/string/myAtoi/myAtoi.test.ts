@@ -92,5 +92,20 @@ describe('myAtoi', () => {
             let result = myAtoi(s)
             expect(result).toBe(1337)
         })
+
+        test('returns zero for empty and whitespace-only input', () => {
+            expect(myAtoi('')).toBe(0)
+            expect(myAtoi('   ')).toBe(0)
+        })
+
+        test('clamps exactly at the signed 32-bit boundaries', () => {
+            expect(myAtoi('2147483647')).toBe(2147483647)
+            expect(myAtoi('-2147483648')).toBe(-2147483648)
+        })
+
+        test('stops when a sign is not followed by a number', () => {
+            expect(myAtoi('+-12')).toBe(0)
+            expect(myAtoi('- 12')).toBe(0)
+        })
     })
 })
