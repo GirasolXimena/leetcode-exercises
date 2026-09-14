@@ -8,7 +8,8 @@
 		"vscode": {
 			"extensions": [
 				"sleistner.vscode-fileutils",
-				"vitest.explorer"
+				"vitest.explorer",
+				"github.vscode-github-actions"
 			]
 		}
 	},
