@@ -1,8 +1,7 @@
-function canJump(nums: number[]): boolean {
+export function canJump(nums: number[]): boolean {
     const goal = nums.length - 1;
 
     function isJumpable(position: number): boolean {
-        console.log('gn called', position)
         // we have reached goal
         if (position === goal) {
             return true;
@@ -25,7 +24,6 @@ function canJump(nums: number[]): boolean {
             nextPosition <= furthestJump;
             nextPosition++
         ) {
-            console.log({ position, nextPosition})
             if (isJumpable(nextPosition)) {
                 return true;
             }

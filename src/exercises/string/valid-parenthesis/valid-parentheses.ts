@@ -6,7 +6,7 @@ openParens.set('}', '{')
 // close parens are keys since we can only try validate a pair
 // when we come across a close array
 
-function isValid(s: string): boolean {
+export function isValid(s: string): boolean {
   // if string is not at least 2 chars long
   if (s.length < 2 || s.length % 2 !== 0) {
     // or string length is not odd
